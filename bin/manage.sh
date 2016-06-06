@@ -13,6 +13,15 @@ preStart() {
         -template "/etc/nginx/nginx.conf.ctmpl:/etc/nginx/nginx.conf"
 }
 
+# Kill runit so we stop the container if the instance stops
+postStop() {
+    pkill -SIGTERM 1
+}
+
+health() {
+    /usr/bin/curl --fail -so /dev/null http://localhost/health
+}
+
 # Render Nginx configuration template using values from Consul,
 # then gracefully reload Nginx
 onChange() {

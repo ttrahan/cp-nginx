@@ -1,0 +1,19 @@
+#!/bin/bash
+# runit file for starting Consul
+
+# load in environment that runit blows away
+set -a
+source /etc/envvars
+set +a
+
+set -e
+exec 2>&1
+umask 022
+
+exec /usr/local/bin/consul agent \
+     -data-dir=/data \
+     -config-dir=/config \
+     -rejoin \
+     -retry-join ${CONSUL} \
+     -retry-max 10 \
+     -retry-interval 10s

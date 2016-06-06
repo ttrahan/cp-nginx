@@ -1,12 +1,13 @@
 {
-  "consul": "{{ .CONSUL }}:8500",
-  "preStart": "/usr/local/bin/reload.sh preStart",
+  "consul": "localhost:8500",
+  "preStart": "/usr/local/bin/manage.sh preStart",
+  "postStop": "/usr/local/bin/manage.sh postStop",
   "services": [
     {
       "name": "nginx",
       "port": 80,
       "publicIp": true,
-      "health": "/usr/bin/curl --fail -s http://localhost/health",
+      "health": "/usr/local/bin/manage.sh health",
       "poll": 10,
       "ttl": 25
     }
@@ -15,7 +16,7 @@
     {
       "name": "{{ .BACKEND }}",
       "poll": 7,
-      "onChange": "/usr/local/bin/reload.sh"
+      "onChange": "/usr/local/bin/manage.sh"
     }
   ],
   "telemetry": {

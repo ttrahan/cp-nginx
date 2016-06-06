@@ -1,0 +1,13 @@
+#!/bin/bash
+# runit file for starting Nginx
+
+# load in environment that runit blows away
+set -a
+source /etc/envvars
+set +a
+
+set -e
+exec 2>&1
+umask 022
+
+exec /usr/local/bin/containerpilot nginx -g 'daemon off;'

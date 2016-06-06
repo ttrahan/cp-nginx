@@ -3,11 +3,21 @@ FROM nginx:latest
 
 # Add some stuff via apt-get
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         bc \
         curl \
         unzip \
+        runit \
     && rm -rf /var/lib/apt/lists/*
+
+# Add Consul from https://releases.hashicorp.com/consul
+RUN export VERS=0.6.4 \
+    && export CHECKSUM=abdf0e1856292468e2c9971420d73b805e93888e006c76324ae39416edcf0627 \
+    && curl --retry 7 -Lso /tmp/consul.zip "https://releases.hashicorp.com/consul/${VERS}/consul_${VERS}_linux_amd64.zip" \
+    && echo ${CHECKSUM}  /tmp/consul.zip | sha256sum -c \
+    && unzip /tmp/consul -d /usr/local/bin \
+    && rm /tmp/consul.zip \
+    && mkdir /config
 
 # Add Consul template
 # Releases at https://releases.hashicorp.com/consul-template/
@@ -34,7 +44,7 @@ RUN export CONTAINERPILOT_CHECKSUM=e7973bf036690b520b450c3a3e121fc7cd26f1a2 \
 COPY etc /etc
 COPY bin /usr/local/bin
 
-CMD [ "/usr/local/bin/containerpilot", \
-    "nginx", \
-        "-g", \
-        "daemon off;"]
+RUN touch /etc/inittab
+COPY start_runit /usr/sbin/
+
+CMD ["/usr/sbin/start_runit"]
