@@ -21,6 +21,8 @@ nginx:
 example:
     image: autopilotpattern/nginx-example-app
     mem_limit: 128m
+    links:
+        - consul:consul
     environment:
         - CONSUL=consul
     ports:

@@ -6,6 +6,7 @@
     {
       "name": "nginx",
       "port": 80,
+      "interfaces": ["eth1", "eth0"],
       "health": "/usr/bin/curl --fail --silent --show-error --output /dev/null http://localhost/nginx-health",
       "poll": 10,
       "ttl": 25
@@ -31,6 +32,7 @@
     }{{ end }}],
   "telemetry": {
     "port": 9090,
+    "interfaces": ["eth1", "eth0"],
     "sensors": [
       {
         "name": "nginx_connections_unhandled_total",
