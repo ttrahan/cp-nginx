@@ -48,7 +48,7 @@ resources:
     type: params
     version:
       params:
-        BACKEND: example
+        BACKEND: example-backend
         CONSUL: consul
         # CONSUL_AGENT: 0
         ACME_ENV: staging
