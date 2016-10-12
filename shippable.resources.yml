@@ -51,6 +51,7 @@ resources:
     version:
       params:
         BACKEND: example-backend
+        BACKEND_PORT: 4000
         CONSUL: consul
         # CONSUL_AGENT: 0
         ACME_ENV: staging
