@@ -33,6 +33,8 @@ resources:
       cpuShares: 128
       portMappings:
         - 80:80
+        - 443:443
+        - 9090:9090
       publishAllPorts : true
       labels:
         triton.cns.services: nginx
@@ -73,6 +75,8 @@ resources:
     version:
       memory: 64
       cpuShares: 128
+      portMappings:
+        - 4000:4000
       publishAllPorts : true
       labels:
         triton.cns.services: example-backend
