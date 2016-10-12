@@ -1,0 +1,36 @@
+# Language setting
+language: node_js
+
+branches:
+  only:
+    - master
+
+env:
+  global:
+    - REPO=cp-nginx
+    - DOCKER_HUB_URL=ttrahan # {account name}
+
+build:
+  ci:
+    - echo 'CI is running'
+  post_ci:
+    - docker build -t ttrahan/$REPO:$BRANCH.$BUILD_NUMBER .
+
+    # DockerHub
+    - docker push $DOCKER_HUB_URL/$REPO:$BRANCH.$BUILD_NUMBER
+
+integrations:
+  hub:
+    - integrationName: ttrahan-dh
+      type: docker
+  notifications:
+    - integrationName: trigger-img-cp-nginx
+      type: webhook
+      payload:
+        - versionName=$BRANCH.$BUILD_NUMBER
+      branches:
+        only:
+          - master
+      on_success: always
+      on_failure: never
+      on_start: never

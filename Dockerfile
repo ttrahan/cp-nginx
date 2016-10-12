@@ -9,20 +9,6 @@ RUN apt-get update \
         unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Consul
-# Releases at https://releases.hashicorp.com/consul
-RUN export CONSUL_VERSION=0.7.0 \
-    && export CONSUL_CHECKSUM=b350591af10d7d23514ebaa0565638539900cdb3aaa048f077217c4c46653dd8 \
-    && curl --retry 7 --fail -vo /tmp/consul.zip "https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip" \
-    && echo "${CONSUL_CHECKSUM}  /tmp/consul.zip" | sha256sum -c \
-    && unzip /tmp/consul -d /usr/local/bin \
-    && rm /tmp/consul.zip \
-    && mkdir /config
-
-# Create empty directories for Consul config and data
-RUN mkdir -p /etc/consul \
-    && mkdir -p /var/lib/consul
-
 # Install Consul template
 # Releases at https://releases.hashicorp.com/consul-template/
 RUN export CONSUL_TEMPLATE_VERSION=0.14.0 \

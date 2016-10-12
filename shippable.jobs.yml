@@ -1,0 +1,25 @@
+jobs:
+
+# jobs for the sample Container Pilot example
+################################
+
+# add pipeline workflow
+
+# manifest gen for VISUALIZER
+  - name: man-nginx
+    type: manifest
+    steps:
+      - IN: img-nginx
+      - IN: img-opts-nginx
+      - TASK: managed
+
+# deploy visualizer to TEST
+
+# TEST deployment for VISUALIZER to Amazon ECS
+  - name: test-triton-sample
+    type: deploy
+    steps:
+      - IN: man-nginx
+      - IN: params-nginx-test
+      - IN: env-triton
+      - TASK: managed
