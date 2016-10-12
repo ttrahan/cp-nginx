@@ -35,7 +35,7 @@ resources:
         - 80:80
       publishAllPorts : true
       labels:
-        triton.cns.services: consul
+        triton.cns.services: nginx
       dnsSearch:
         - "b71934f2-d224-cd47-fd4b-ef25fd4ee85f.us-west-1.cns.joyent.com"
       links:                                    #optional, containerName:alias
