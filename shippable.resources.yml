@@ -49,6 +49,7 @@ resources:
     version:
       params:
         BACKEND: example
+        CONSUL: consul
         # CONSUL_AGENT: 0
         ACME_ENV: staging
     flags:
