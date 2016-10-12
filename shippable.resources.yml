@@ -79,9 +79,6 @@ resources:
         - "b71934f2-d224-cd47-fd4b-ef25fd4ee85f.us-west-1.cns.joyent.com"
       links:                                    #optional, containerName:alias
         - consul:consul
-      cmd:
-        - /usr/local/bin/containerpilot example-backend -g 'daemon off;'
-
 # Environment variables for TEST environment
   - name: params-backend-test
     type: params
