@@ -31,7 +31,6 @@
   "backends": [
     {
       "name": "{{ .BACKEND }}",
-      "port": "{{ .BACKEND_PORT }}"
       "poll": 7,
       "onChange": "/usr/local/bin/reload.sh"
     }
