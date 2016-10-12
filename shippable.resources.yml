@@ -67,7 +67,7 @@ resources:
       versionName: example
 
 # Docker Image Options
-  - name: img-opts-nginx
+  - name: img-opts-backend
     type: dockerOptions
     version:
       memory: 64
