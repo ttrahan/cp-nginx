@@ -40,8 +40,8 @@ resources:
         - "b71934f2-d224-cd47-fd4b-ef25fd4ee85f.us-west-1.cns.joyent.com"
       links:                                    #optional, containerName:alias
         - consul:consul
-      cmd:
-        - /usr/local/bin/containerpilot nginx -g 'daemon off;'
+      # cmd:
+      #   - /usr/local/bin/containerpilot nginx -g 'daemon off;'
 
 # Environment variables for TEST environment
   - name: params-nginx-test
@@ -49,7 +49,7 @@ resources:
     version:
       params:
         BACKEND: example
-        CONSUL_AGENT: 0
+        # CONSUL_AGENT: 0
         ACME_ENV: staging
     flags:
       - nginx
@@ -84,7 +84,6 @@ resources:
     type: params
     version:
       params:
-        CONSUL_AGENT: 0
         ACME_ENV: staging
     flags:
       - backend
