@@ -85,5 +85,6 @@ resources:
     version:
       params:
         ACME_ENV: staging
+        CONSUL: consul
     flags:
       - backend
