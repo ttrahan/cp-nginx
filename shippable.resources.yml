@@ -48,7 +48,7 @@ resources:
     type: params
     version:
       params:
-        BACKEND: example-backend
+        BACKEND: example-backend.svc.b71934f2-d224-cd47-fd4b-ef25fd4ee85f.us-west-1.triton.zone
         CONSUL: consul
         # CONSUL_AGENT: 0
         ACME_ENV: staging
