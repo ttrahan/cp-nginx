@@ -80,7 +80,7 @@ resources:
       links:                                    #optional, containerName:alias
         - consul:consul
       cmd:
-        - /usr/local/bin/containerpilot nginx -g 'daemon off;'
+        - /usr/local/bin/containerpilot example-backend -g 'daemon off;'
 
 # Environment variables for TEST environment
   - name: params-backend-test
