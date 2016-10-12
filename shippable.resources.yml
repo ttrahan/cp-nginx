@@ -54,6 +54,40 @@ resources:
     flags:
       - nginx
 
-
-
 # ################################
+
+# Docker Image
+  - name: img-backend
+    type: image
+    integration: ttrahan-dh
+    pointer:
+      sourceName: ttrahan/cp-backend
+      isPull: false
+    seed:
+      versionName: example
+
+# Docker Image Options
+  - name: img-opts-nginx
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      publishAllPorts : true
+      labels:
+        triton.cns.services: example-backend
+      dnsSearch:
+        - "b71934f2-d224-cd47-fd4b-ef25fd4ee85f.us-west-1.cns.joyent.com"
+      links:                                    #optional, containerName:alias
+        - consul:consul
+      cmd:
+        - /usr/local/bin/containerpilot nginx -g 'daemon off;'
+
+# Environment variables for TEST environment
+  - name: params-backend-test
+    type: params
+    version:
+      params:
+        CONSUL_AGENT: 0
+        ACME_ENV: staging
+    flags:
+      - backend
